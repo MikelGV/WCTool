@@ -21,7 +21,7 @@ func IsEmpty() (bool, error) {
 }
 
 func isFlagSet(ci *cli.Cli) bool {
-    return ci.ByteCount 
+    return ci.ByteCount || ci.LineCount 
 }
 
 
@@ -42,6 +42,8 @@ func PrintOutput(ci *cli.Cli, w interfaces.WcInterface) error {
         switch {
             case ci.ByteCount:
                 output, err = w.ByteCount()
+            case ci.LineCount:
+                output, err = w.LineCount()
         }
     } 
     if err != nil {
@@ -59,6 +61,12 @@ func printNArg(ci *cli.Cli, w interfaces.WcInterface) (string, error) {
         return "", err
     }
 
-    return fmt.Sprintf("\t%d\n\t%v\n", qrtyByte, ci.FileName), nil
+    qrtyLine, err := w.LineCount()
+
+    if err != nil {
+        return "", err
+    }
+
+    return fmt.Sprintf("\t%d\n \t%d\n \t%v\n", qrtyLine, qrtyByte, ci.FileName), nil
 
 }
