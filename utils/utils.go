@@ -21,7 +21,7 @@ func IsEmpty() (bool, error) {
 }
 
 func isFlagSet(ci *cli.Cli) bool {
-    return ci.ByteCount || ci.LineCount 
+    return ci.ByteCount || ci.LineCount || ci.WordCount 
 }
 
 
@@ -44,6 +44,8 @@ func PrintOutput(ci *cli.Cli, w interfaces.WcInterface) error {
                 output, err = w.ByteCount()
             case ci.LineCount:
                 output, err = w.LineCount()
+            case ci.WordCount:
+                output, err = w.WordCount()
         }
     } 
     if err != nil {

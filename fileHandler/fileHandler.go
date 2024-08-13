@@ -62,6 +62,26 @@ func (fh FileHandler) LineCount() (int, error) {
     return fh.Count, nil
 }
 
+func (fh FileHandler) WordCount() (int, error) {
+    file, err := fh.OpenFile() 
+
+   if  err != nil {
+       log.Fatal(err)
+    }
+
+    defer file.Close()
+
+
+    scanner := bufio.NewScanner(file)
+    scanner.Split(bufio.ScanWords)
+
+    if err := fh.scan(scanner); err != nil {
+        return 0, err
+    }
+
+    return fh.Count, nil
+}
+
 func (fh *FileHandler) scan(scanner *bufio.Scanner) error {
     for scanner.Scan() {
         fh.Count++
