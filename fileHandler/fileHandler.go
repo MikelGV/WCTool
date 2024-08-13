@@ -43,7 +43,7 @@ func (fh FileHandler) ByteCount() (int, error) {
 }
 
 func (fh *FileHandler) scan(scanner *bufio.Scanner) error {
-    if scanner.Scan() {
+    for scanner.Scan() {
         fh.Count++
     }
 
