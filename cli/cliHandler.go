@@ -6,6 +6,7 @@ type Cli struct {
     ByteCount bool
     LineCount bool
     WordCount bool
+    CharCount bool
     FileName string
 }
 
@@ -13,6 +14,7 @@ func New() *Cli {
     byteCount := flag.Bool("c", false, "Gives the byte count")
     lineCount := flag.Bool("l", false, "Gives the line count")
     wordCount := flag.Bool("w", false, "Gives the word count")
+    charCount := flag.Bool("m", false, "Gives the characters count")
 
     flag.Parse()
 
@@ -20,6 +22,7 @@ func New() *Cli {
         ByteCount: *byteCount,
         LineCount: *lineCount,
         WordCount: *wordCount,
+        CharCount: *charCount,
         FileName: determineFlName(),
     }
 
