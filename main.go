@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
+	stdinhandler "github.com/MikelGV/WCTool/StdinHandler"
 	"github.com/MikelGV/WCTool/cli"
 	filehandler "github.com/MikelGV/WCTool/fileHandler"
 	interfaces "github.com/MikelGV/WCTool/interface"
@@ -28,7 +28,7 @@ func main() {
             log.Fatal("there is no filename")
         }
 
-        fmt.Println("nothing to see here")
+        wcI = stdinhandler.StdInHandler{}
 
     } else {
         wcI = filehandler.FileHandler{
@@ -36,8 +36,6 @@ func main() {
         }
     }
 
-
-    // I need to access the output somehow
     if err := utils.PrintOutput(cli, wcI); err != nil {
         log.Fatal(err)
     }

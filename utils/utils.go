@@ -71,6 +71,12 @@ func printNArg(ci *cli.Cli, w interfaces.WcInterface) (string, error) {
         return "", err
     }
 
-    return fmt.Sprintf("\t%d\n \t%d\n \t%v\n", qrtyLine, qrtyByte, ci.FileName), nil
+    qrtyWord, err := w.WordCount()
+
+    if err != nil {
+        return "", err
+    }
+
+    return fmt.Sprintf("\t%d\n \t%d\n \t%d\n \t%v\n", qrtyLine, qrtyByte, qrtyWord, ci.FileName), nil
 
 }
